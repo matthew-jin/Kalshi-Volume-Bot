@@ -1,0 +1,68 @@
+# Kalshi Trading Bot Configuration
+# Environment variables take precedence over these settings
+
+kalshi:
+  # Environment: sandbox (demo) or production (real money)
+  environment: production
+
+trading:
+  # Minimum market liquidity in USD to consider a market
+  # Note: Set to 0 to allow markets with indicative quotes but empty orderbooks
+  # Note: NCAAB markets have empty orderbooks (indicative quotes only), set to 0 for those
+  liquidity_threshold_usd: 0
+
+  # Minimum probability (yes or no side) to enter a position (0.5 - 0.99)
+  probability_threshold: 0.70
+
+  # Maximum probability to enter (avoid overpaying for near-certain outcomes)
+  max_probability_threshold: 0.90
+
+  # Exit position when profit reaches this percentage (e.g., 0.065 = 6.5%)
+  profit_target_percent: 0.065
+
+  # Optional: Exit if loss exceeds this percentage (null = no stop-loss)
+  # Example: 0.10 = exit if down 10%
+  stop_loss_percent: 0.1
+
+  # Minimum market volume to apply stop-loss (low-volume markets have noisy price swings)
+  stop_loss_min_volume: 100000
+
+  # Minimum percentage of portfolio for a single position
+  min_position_percent: 0.02
+
+  # Maximum percentage of portfolio for a single position
+  max_position_percent: 0.10
+
+  # Maximum number of open positions at once
+  max_concurrent_positions: 8
+
+  # Only consider markets closing within this many hours (0 = no limit)
+  # Note: college_basketball uses game-date filtering instead of close time
+  max_hours_until_close: 0
+
+  # Minimum contracts per trade
+  min_contracts: 1
+
+  # Compound profits into subsequent trades
+  compound_profits: true
+
+  # How often to scan for new opportunities (seconds)
+  scan_interval_seconds: 30
+
+  # Cancel unfilled orders after this time (seconds)
+  order_timeout_seconds: 300
+
+  # Market category filter
+  # Options: all, crypto, weather, politics, economics, sports, player_props, college_basketball
+  market_category: college_basketball
+
+  # Include live/active markets (games currently in progress)
+  # Set to false to only enter markets before they go live
+  include_live_markets: false
+
+  # Dry run mode: scan and log opportunities without placing real orders
+  dry_run: false
+
+logging:
+  level: INFO
+  file: logs/bot.log

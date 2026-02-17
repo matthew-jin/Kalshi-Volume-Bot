@@ -1,0 +1,34 @@
+[project]
+name = "kalshi-bot"
+version = "0.1.0"
+description = "High-probability trading bot for Kalshi prediction markets"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "kalshi-python>=0.3.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "pyyaml>=6.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-mock>=3.0.0",
+]
+
+[project.scripts]
+kalshi-bot = "scripts.run_bot:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "config*", "scripts*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
