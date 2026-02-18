@@ -27,6 +27,10 @@ trading:
   # Minimum market volume to apply stop-loss (low-volume markets have noisy price swings)
   stop_loss_min_volume: 100000
 
+  # Minimum market volume (contracts traded) to consider a market
+  # Useful for college_basketball where orderbooks are empty but volume indicates real activity
+  min_market_volume: 10000
+
   # Minimum percentage of portfolio for a single position
   min_position_percent: 0.02
 
@@ -34,7 +38,7 @@ trading:
   max_position_percent: 0.10
 
   # Maximum number of open positions at once
-  max_concurrent_positions: 8
+  max_concurrent_positions: 4
 
   # Only consider markets closing within this many hours (0 = no limit)
   # Note: college_basketball uses game-date filtering instead of close time

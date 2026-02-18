@@ -77,6 +77,14 @@ class MarketFilters:
             logger.debug(f"Market {market.ticker} failed quick filter: no bids")
             return False
 
+        # Check minimum volume
+        if self.settings.min_market_volume > 0 and market.volume < self.settings.min_market_volume:
+            logger.debug(
+                f"Market {market.ticker} failed volume filter: "
+                f"{market.volume} < {self.settings.min_market_volume}"
+            )
+            return False
+
         # For college basketball, filter by game date in ticker (close times are weeks out)
         if self.settings.market_category == MarketCategory.COLLEGE_BASKETBALL:
             if not self._is_todays_game(market):

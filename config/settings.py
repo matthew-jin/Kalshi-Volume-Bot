@@ -109,6 +109,9 @@ class TradingSettings(BaseSettings):
     stop_loss_min_volume: int = Field(
         default=100000, ge=0, description="Only apply stop-loss to markets with at least this volume"
     )
+    min_market_volume: int = Field(
+        default=0, ge=0, description="Minimum market volume (contracts traded) to consider"
+    )
 
     # Position sizing
     min_position_percent: float = Field(
