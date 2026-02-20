@@ -24,6 +24,17 @@ class CategoryMatcher:
             # NCAA Men's Basketball totals (over/under points)
             r"^KXNCAAMBTOTAL",
         ],
+        "basketball": [
+            # NCAA Men's Basketball
+            r"^KXNCAAMBGAME",
+            r"^KXNCAAMBSPREAD",
+            r"^KXNCAAMBTOTAL",
+            # NBA
+            r"^KXNBAGAME",
+            r"^KXNBASPREAD",
+            r"^KXNBATOTAL",
+            r"^KXNBA.*GAME",
+        ],
         "player_props": [
             # Kalshi basketball ticker prefixes
             r"^KXNBA",

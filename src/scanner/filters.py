@@ -85,8 +85,8 @@ class MarketFilters:
             )
             return False
 
-        # For college basketball, filter by game date in ticker (close times are weeks out)
-        if self.settings.market_category == MarketCategory.COLLEGE_BASKETBALL:
+        # For basketball categories, filter by game date in ticker (close times are weeks out)
+        if self.settings.market_category in (MarketCategory.COLLEGE_BASKETBALL, MarketCategory.BASKETBALL):
             if not self._is_todays_game(market):
                 return False
         # Check close time if configured (for other categories)

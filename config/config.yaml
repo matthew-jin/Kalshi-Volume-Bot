@@ -57,8 +57,8 @@ trading:
   order_timeout_seconds: 300
 
   # Market category filter
-  # Options: all, crypto, weather, politics, economics, sports, player_props, college_basketball
-  market_category: college_basketball
+  # Options: all, crypto, weather, politics, economics, sports, player_props, college_basketball, basketball
+  market_category: basketball
 
   # Include live/active markets (games currently in progress)
   # Set to false to only enter markets before they go live

@@ -29,6 +29,7 @@ class MarketCategory(str, Enum):
     SPORTS = "sports"
     PLAYER_PROPS = "player_props"
     COLLEGE_BASKETBALL = "college_basketball"
+    BASKETBALL = "basketball"
 
 
 class KalshiSettings(BaseSettings):
