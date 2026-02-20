@@ -1,6 +1,7 @@
 """Main trading bot orchestrator."""
 
 import logging
+import random
 import re
 import time
 from dataclasses import dataclass, field
@@ -411,9 +412,12 @@ class TradingBot:
         # Get portfolio value for sizing
         portfolio_value = self.portfolio.get_portfolio_value_for_sizing()
 
-        # Scan and enter inline — process each opportunity as it's found
-        # instead of waiting for the full scan to complete
-        for opp in self.scanner.scan_iter():
+        # Collect all opportunities and shuffle to avoid always favoring
+        # whichever league appears first in API pagination order
+        opportunities = list(self.scanner.scan_iter())
+        random.shuffle(opportunities)
+
+        for opp in opportunities:
             # Re-check position limit before each entry (exclude pending exits)
             current = self.position_monitor.count_positions()
             exiting = len(self.exit_handler._pending_exit_tickers)
