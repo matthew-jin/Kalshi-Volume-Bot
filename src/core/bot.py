@@ -1,7 +1,6 @@
 """Main trading bot orchestrator."""
 
 import logging
-import random
 import re
 import time
 from dataclasses import dataclass, field
@@ -412,10 +411,12 @@ class TradingBot:
         # Get portfolio value for sizing
         portfolio_value = self.portfolio.get_portfolio_value_for_sizing()
 
-        # Collect all opportunities and shuffle to avoid always favoring
-        # whichever league appears first in API pagination order
+        # Sort by estimated game start time (earliest first) so we prioritize
+        # games starting sooner. Games without expiration time go last.
         opportunities = list(self.scanner.scan_iter())
-        random.shuffle(opportunities)
+        opportunities.sort(
+            key=lambda o: o.market.expected_expiration_time or datetime.max.replace(tzinfo=timezone.utc)
+        )
 
         for opp in opportunities:
             # Re-check position limit before each entry (exclude pending exits)
