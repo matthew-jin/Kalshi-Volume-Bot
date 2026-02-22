@@ -191,8 +191,19 @@ class CategoryMatcher:
         if target_category.lower() == "all":
             return True
 
-        market_category = self.get_category(market)
-        return market_category == target_category.lower()
+        # Check if market matches any pattern for the target category directly,
+        # rather than relying on get_category() which returns only the first match.
+        # This is important for composite categories like "basketball" that share
+        # patterns with "college_basketball".
+        target = target_category.lower()
+        if target not in self._compiled_patterns:
+            return False
+
+        text_to_check = f"{market.ticker} {market.title} {market.category}"
+        for pattern in self._compiled_patterns[target]:
+            if pattern.search(text_to_check):
+                return True
+        return False
 
     def get_all_categories(self) -> List[str]:
         """Get list of all supported categories."""
